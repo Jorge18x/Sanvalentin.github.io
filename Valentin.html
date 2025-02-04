@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¿Quieres ser mi San Valentín?</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #ffe6e6;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        img {
+            width: 200px;
+        }
+        h1 {
+            font-size: 24px;
+        }
+        .buttons {
+            margin-top: 20px;
+        }
+        button {
+            font-size: 18px;
+            padding: 10px 20px;
+            margin: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #yes {
+            background-color: #ff6699;
+            color: white;
+        }
+        #no {
+            background-color: #999;
+            color: white;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="gatito.jpg" alt="Cute cats">
+        <h1>¿Te gustaría ser mi San Valentín? 🥰</h1>
+        <p>Aunque estemos lejos, quiero que sepas que te amo mucho y me gustaría que lo fueras</p>
+        <div class="buttons">
+            <button id="yes">SÍ</button>
+            <button id="no">NO</button>
+        </div>
+    </div>
+    <script>
+        document.getElementById("yes").addEventListener("click", function() {
+            alert("¡Sabía que dirías que sí! 💖");
+        });
+
+        document.getElementById("no").addEventListener("mouseover", function() {
+            let x = Math.random() * (window.innerWidth - 100);
+            let y = Math.random() * (window.innerHeight - 50);
+            this.style.left = x + "px";
+            this.style.top = y + "px";
+        });
+    </script>
+</body>
+</html>
