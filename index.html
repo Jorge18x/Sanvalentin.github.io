@@ -5,62 +5,196 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¿Quieres ser mi San Valentín?</title>
     <style>
+        /* Fuente romántica */
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Great+Vibes&display=swap');
+
         body {
-            text-align: center;
-            font-family: Arial, sans-serif;
-            background-color: #ffe6e6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Pacifico', cursive;
+            background-color: #ffccd5;
+            overflow: hidden;
+            position: relative;
         }
+
+        /* Corazones generados infinitamente */
+        .heart {
+            position: absolute;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cpath fill='%23ff4d79' d='M100 36.4C84.6 20 62.4 10 40 10 18 10 0 28 0 50c0 20 14 38 36 50l64 40 64-40c22-12 36-30 36-50 0-22-18-40-40-40-22.4 0-44.6 10-60 26.4z'/%3E%3C/svg%3E");
+            background-size: 50px;
+            opacity: 0.3;
+            animation: fall 10s linear infinite;
+            width: 50px;
+            height: 50px;
+            transform-origin: center;
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100px) rotate(0deg); }
+            100% { transform: translateY(100vh) rotate(360deg); }
+        }
+
+        /* Posicionar los corazones de manera aleatoria */
+        @keyframes heartAppear {
+            0% {
+                left: -50px;
+                top: 0;
+            }
+            100% {
+                left: 100%;
+                top: 100vh;
+            }
+        }
+
+        body::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
         .container {
-            margin-top: 50px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 2s ease-in-out;
+            position: relative;
+            z-index: 1;
         }
+
         img {
             width: 200px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
         }
+
         h1 {
-            font-size: 24px;
+            font-size: 36px;
+            color: #ff4d79;
+            margin-bottom: 10px;
+            font-family: 'Great Vibes', cursive;
         }
+
+        p {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
         .buttons {
             margin-top: 20px;
+            position: relative;
+            width: 100%;
+            height: 60px;
         }
+
         button {
-            font-size: 18px;
-            padding: 10px 20px;
+            font-size: 20px;
+            padding: 12px 30px;
             margin: 10px;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
+            transition: 0.3s ease;
+            font-family: 'Pacifico', cursive;
         }
+
         #yes {
-            background-color: #ff6699;
+            background-color: #ff4d79;
             color: white;
         }
+
+        #yes:hover {
+            background-color: #ff1a66;
+            transform: scale(1.1);
+        }
+
         #no {
             background-color: #999;
             color: white;
-            position: absolute;
+            position: relative;
+        }
+
+        /* Animaciones */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <img src="gatito.jpg" alt="Cute cats">
+        <img src="gatito.jpg" alt="Cute cat">
         <h1>¿Te gustaría ser mi San Valentín? 🥰</h1>
-        <p>Aunque estemos lejos, quiero que sepas que te amo mucho y me gustaría que lo fueras</p>
+        <p>Aunque la distancia nos separe, mi corazón siempre estará cerca del tuyo.</p>
         <div class="buttons">
             <button id="yes">SÍ</button>
             <button id="no">NO</button>
         </div>
     </div>
+
+    <!-- Corazones generados infinitamente -->
+    <script>
+        // Función para crear corazones en el fondo
+        function generateHearts() {
+            const heartCount = 20; // Número de corazones a generar
+            for (let i = 0; i < heartCount; i++) {
+                const heart = document.createElement('div');
+                heart.classList.add('heart');
+                document.body.appendChild(heart);
+
+                // Asignar un tiempo de animación aleatorio
+                heart.style.animationDuration = `${Math.random() * 5 + 5}s`; // duración entre 5 y 10 segundos
+                heart.style.left = `${Math.random() * 100}%`; // Posición aleatoria en el eje X
+            }
+        }
+
+        // Llamar a la función para generar los corazones
+        generateHearts();
+    </script>
+
     <script>
         document.getElementById("yes").addEventListener("click", function() {
-            alert("¡Sabía que dirías que sí! 💖");
+            document.querySelector(".container").innerHTML = `
+                <h1>¡Sabía que dirías que sí! 💖</h1>
+                <p>Eres la mejor persona que podría haber elegido. ¡Te amo!</p>
+                <img src="gatito.jpg" alt="Cute cat">
+            `;
         });
 
         document.getElementById("no").addEventListener("mouseover", function() {
-            let x = Math.random() * (window.innerWidth - 100);
-            let y = Math.random() * (window.innerHeight - 50);
-            this.style.left = x + "px";
-            this.style.top = y + "px";
+            const buttonsContainer = document.querySelector(".buttons");
+            const noButton = document.getElementById("no");
+
+            // Obtener las dimensiones del contenedor y del botón
+            const containerRect = buttonsContainer.getBoundingClientRect();
+            const buttonRect = noButton.getBoundingClientRect();
+
+            // Calcular los límites para que el botón no se salga del contenedor
+            const maxX = containerRect.width - buttonRect.width;
+            const maxY = containerRect.height - buttonRect.height;
+
+            // Generar nuevas coordenadas aleatorias dentro de los límites
+            const newX = Math.random() * maxX;
+            const newY = Math.random() * maxY;
+
+            // Aplicar las nuevas coordenadas al botón
+            noButton.style.left = `${newX}px`;
+            noButton.style.top = `${newY}px`;
         });
     </script>
 </body>
